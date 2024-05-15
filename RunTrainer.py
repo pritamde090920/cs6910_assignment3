@@ -107,7 +107,7 @@ class Trainer:
         '''save the model if needed'''
         if(saveBestModel==1):
             state=deepcopy(framework.state_dict())
-            torch.save(state,"/modelParam.pth")
+            torch.save(state,"/frameworkState.pth")
         
         if trainPy==1:
             return framework
