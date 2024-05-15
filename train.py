@@ -28,7 +28,7 @@ def arguments():
     commandLineArgument.add_argument('-enc','--encoder',type=int,help="Number of layers in the encoder")
     commandLineArgument.add_argument('-dec','--decoder',type=int,help="Number of layers in the decoder")
     commandLineArgument.add_argument('-c','--cell',help="Type of cell")
-    commandLineArgument.add_argument('-bid','--bidir',help="Bidirectional flow")
+    commandLineArgument.add_argument('-bid','--bidir',help="choices: [YES,NO]")
     commandLineArgument.add_argument('-t','--test',type=int,help="choices: [0,1]")
     commandLineArgument.add_argument('-att','--attention',type=int,help="choices: [0,1]")
     commandLineArgument.add_argument('-h','--heatmap',type=int,help="choices: [0,1]")
