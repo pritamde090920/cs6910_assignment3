@@ -111,9 +111,9 @@ The following features are also supported
     python train.py --help
     ```
   - If you want to apply attention and generate the 3x3 heatmap grid then you can run the model like below. This will save a png file in the same working directory and also log the image into the wandb project
-  ```
-  python train.py --attention 1 --heatmap 1
-  ``` 
+    ```
+    python train.py --attention 1 --heatmap 1
+    ``` 
   
   
 
