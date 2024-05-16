@@ -12,7 +12,7 @@ import random
 
 
 class Train:
-    def runTrain(root,epochs,batchSize,test,attention,heatmap,modelType,embeddingSize,layersInEncoder,layersInDecoder,neruonsInFC,bidirectional,dropoutProb,learningRate):
+    def runTrain(root,epochs,batchSize,test,attention,heatmap,modelType,embeddingSize,layersInEncoder,layersInDecoder,neruonsInFC,bidirectional,dropoutProb,learningRate,fontName):
         '''loads dataset'''
         lang=""
         d=DatasetLoad()
@@ -48,6 +48,7 @@ class Train:
         myModel=Model(vocabulary,trainEmbeddedDataLoader,valEmbeddedDataLoader,test=test,attention=attention,trainPy=1)
         framework=myModel.createModelFramework(modelType=modelType,embeddingSize=embeddingSize,neruonsInFC=neruonsInFC,layersInEncoder=layersInEncoder,layersInDecoder=layersInDecoder,dropout=dropoutProb,bidirectional=bidirectional,learningRate=learningRate,epochs=epochs,batchSize=batchSize)
 
+        '''if prompted then do testing'''
         if test==1:
             if attention==1:                
                 '''call the function which calculates the accuracy and loss'''
@@ -74,7 +75,7 @@ class Train:
                         englishWords[heatmapIndex]=englishWord
                         bengaliWords[heatmapIndex]=bengaliWord
                         heatmapIndex+=1
-                    AttentionHeatmap.plotAttn(framework,englishWords,bengaliWords,vocabulary)
+                    AttentionHeatmap.plotAttn(framework,englishWords,bengaliWords,vocabulary,trainPy=1,fontName=fontName)
             else:
                 '''call the function which calculates the accuracy and loss'''
                 paramList=[framework,testEmbeddedDataset,d.test_dataframe,64,vocabulary.paddingIndex,vocabulary.endOfSequenceIndex,vocabulary.indexToCharDictForBengali]

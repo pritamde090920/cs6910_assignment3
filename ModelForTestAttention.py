@@ -58,7 +58,7 @@ def createCsv(actualData,modelPredictedWords):
     additional_rows=actualData[actualData['Original']!=actualData['Predicted']].sample(n=additional_rows_needed)
     additional_rows['Predicted']=additional_rows['Original']
     actualData.update(additional_rows)
-    actualData.to_csv("modelPredictionsWithAttention1.csv",index=False)
+    actualData.to_csv("modelPredictionsWithAttention.csv",index=False)
 
 
 
@@ -154,8 +154,13 @@ class RunTestOnBestModel:
             testAccuracy=correctPredictions/(len(dataLoader)*batchSize)
             testLoss=totalLoss/len(dataLoader)
             print("===========================================================================")
-            print("Test Accuracy for best model with attention: {}".format(testAccuracy))
-            print("Test Loss for best model with attention: {}".format(testLoss))
+
+            if trainPy==0:
+                print("Test Accuracy for best model with attention: {}".format(testAccuracy))
+                print("Test Loss for best model with attention: {}".format(testLoss))
+            else:
+                print("Test Accuracy with attention: {}".format(testAccuracy))
+                print("Test Loss with attention: {}".format(testLoss))
 
             '''create csv of the predictions'''
             createCsv(actualData,modelPredictedWords)
@@ -164,5 +169,5 @@ class RunTestOnBestModel:
                 '''create the image of the table'''
                 createPlot()
         
-                image=Image.open("ModelPredictionsAttention.png")
+                image=Image.open("predictions_attention/ModelPredictionsAttention.png")
                 return image

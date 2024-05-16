@@ -89,7 +89,8 @@ The arguments supported are :
 |   `-bid`, `--bidir`        |       YES       | choices: [YES,NO]                                  |
 |   `-t`, `--test`        |       0       | choices: [0,1]                                  |
 |   `-att`, `--attention`        |       1       | choices: [0,1]                                  |
-|   `-h`, `--heatmap`        |       1       | choices: [0,1]                                  |
+|   `-ht`, `--heat`        |       1       | choices: [0,1]                                  |
+|   `-f`, `--font`        |       BengaliFont.TTF       | Font of the language chosen to generate the heatmap                                  |
 
 The arguments can be changed as per requirement through the command line.
   - If prompted to enter the wandb login key, enter the key in the interactive command prompt.

@@ -58,7 +58,7 @@ def createCsv(actualData,modelPredictedWords):
     additional_rows=actualData[actualData['Original']!=actualData['Predicted']].sample(n=additional_rows_needed)
     additional_rows['Predicted']=additional_rows['Original']
     actualData.update(additional_rows)
-    actualData.to_csv("modelPredictions1.csv",index=False)
+    actualData.to_csv("modelPredictions.csv",index=False)
 
 
 
@@ -94,7 +94,7 @@ def createPlot():
 
 '''class to run the test on vanilla model'''
 class RunTestOnBestModel:
-    def testAndGivePredictions(argList,trainPy):
+    def testAndGivePredictions(argList,trainPy=0):
         '''
             Parameters:
                 argList : list of arguments
@@ -154,15 +154,20 @@ class RunTestOnBestModel:
             testAccuracy=correctPredictions/(len(dataLoader)*batchSize)
             testLoss=totalLoss/len(dataLoader)
             print("===========================================================================")
-            print("Test Accuracy for best vanilla model: {}".format(testAccuracy))
-            print("Test Loss for best vanilla model: {}".format(testLoss))
+
+            if trainPy==0:
+                print("Test Accuracy for best vanilla model: {}".format(testAccuracy))
+                print("Test Loss for best vanilla model: {}".format(testLoss))
+            else:
+                print("Test Accuracy: {}".format(testAccuracy))
+                print("Test Loss: {}".format(testLoss))
 
             '''create csv of the predictions'''
-            createCsv(actualData,modelPredictedWords)
+            createCsv(actualData,modelPredictedWords,trainPy)
 
             if trainPy==0:
                 '''create the image of the table'''
                 createPlot()
 
-                image=Image.open("ModelPredictionsVanilla.png")
+                image=Image.open("predictions_vanilla/ModelPredictionsVanilla.png")
                 return image

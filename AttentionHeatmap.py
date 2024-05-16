@@ -46,7 +46,7 @@ def createAttentionPerCharacter(attention,character,bengaliLength,englishLength)
 
 
 
-def createHeatMap(attentionPerCharacter,axes,row,bengaliLength,englishLength,xTicks,yTicks):
+def createHeatMap(attentionPerCharacter,axes,row,bengaliLength,englishLength,xTicks,yTicks,fontName):
     '''
         Parameters:
             attentionPerCharacter : attention given to each character
@@ -56,6 +56,7 @@ def createHeatMap(attentionPerCharacter,axes,row,bengaliLength,englishLength,xTi
             englishLength : length of the source word
             xTicks : x axis labels
             yTicks : y axis labels
+            fontName : the font file name which will be used to support the translated language in matplotlib
         Returns :
             axes : axes of the graph after the heatmap is plotted on the particluar row
         Function:
@@ -86,7 +87,7 @@ def createHeatMap(attentionPerCharacter,axes,row,bengaliLength,englishLength,xTi
     axes[row].yaxis.set_minor_locator(minorObj)
     axes[row].yaxis.set_minor_formatter(yObj)
     axes[row].set_yticklabels(yTicks,rotation=0,fontdict={'fontsize':12})  
-    axes[row].set_xticklabels(xTicks,fontproperties=FontProperties(fname='BengaliFont.TTF'),fontdict={'fontsize':12})
+    axes[row].set_xticklabels(xTicks,fontproperties=FontProperties(fname=fontName),fontdict={'fontsize':12})
     axes[row].xaxis.tick_top()
     axes[row].set_xlabel('Predicted Bengali Word',size=14,labelpad=-300)
     axes[row].set_ylabel('Original English Word',size=14)
@@ -94,18 +95,19 @@ def createHeatMap(attentionPerCharacter,axes,row,bengaliLength,englishLength,xTi
 
 
 
-def plotAttn(model,inputSequence,outputSequence,vocabulary,trainPy=0):
+def plotAttn(model,inputSequence,outputSequence,vocabulary,trainPy=0,fontName='BengaliFont.TTF'):
     '''
         Parameters:
             model : model on which to create the heatmaps
             inputSequence : word in source language
             outputSequence : word in target language
             vocabulary : vocabulary of the dataset
-            trainPy : variable indicating whether this is trian.py call or not
+            trainPy : variable indicating whether this is train.py call or not
+            fontName : the font file name which will be used to support the translated language in matplotlib
         Returns :
             None
         Function:
-            Creates 9x9 heatmap grid
+            Creates 3x3 heatmap grid
     '''
     model.eval()    
     with torch.no_grad():
@@ -126,7 +128,7 @@ def plotAttn(model,inputSequence,outputSequence,vocabulary,trainPy=0):
         inputSequence=inputSequence.T
         attentionSequence=attentionSequence.T
         
-        fig,axes=createPlot()
+        _,axes=createPlot()
         
         '''iterate on each character of the word'''
         for row in range(inputSequence.size(0)):
@@ -158,14 +160,20 @@ def plotAttn(model,inputSequence,outputSequence,vocabulary,trainPy=0):
             xTicks,yTicks=Utilities.createXandYticks(bengaliLength,englishLength,vocabulary,attentionSequence,inputSequence,row)
 
             '''create the heatmap'''
-            axes=createHeatMap(attentionPerCharacter,axes,row,bengaliLength,englishLength,xTicks,yTicks)
+            axes=createHeatMap(attentionPerCharacter,axes,row,bengaliLength,englishLength,xTicks,yTicks,fontName)
 
         '''save the plot and log into wandb'''
-        plt.savefig('AttentionHeatMap1.png')
+        if trainPy==0:
+            plt.savefig('AttentionHeatMap.png')
+        else:
+            plt.savefig('AttentionHeatMap1.png')
+        
         if trainPy==0:
             wandb.login()
             wandb.init(project="Pritam CS6910 - Assignment 3",name="Question 5 Attention Heatmap")
-        wandb.log({'Attention Heatmap1':wandb.Image(plt)})
+        
+        wandb.log({'Attention Heatmap':wandb.Image(plt)})
+        
         if trainPy==0:
             wandb.finish()
         plt.close()

@@ -31,7 +31,8 @@ def arguments():
     commandLineArgument.add_argument('-bid','--bidir',help="choices: [YES,NO]")
     commandLineArgument.add_argument('-t','--test',type=int,help="choices: [0,1]")
     commandLineArgument.add_argument('-att','--attention',type=int,help="choices: [0,1]")
-    commandLineArgument.add_argument('-h','--heatmap',type=int,help="choices: [0,1]")
+    commandLineArgument.add_argument('-ht','--heat',type=int,help="choices: [0,1]")
+    commandLineArgument.add_argument('-f','--font',help="Font of the language chosen to generate the heatmap")
 
     return commandLineArgument.parse_args()
 
@@ -54,6 +55,7 @@ def main():
     root='aksharantar_sampled/ben'
     attention=1
     heatmap=1
+    fontName='BengaliFont.TTF'
 
     '''call to argument function to get the arguments'''
     argumentsPassed=arguments()
@@ -87,8 +89,10 @@ def main():
         root=argumentsPassed.root
     if argumentsPassed.attention is not None:
         attention=argumentsPassed.attention
-    if argumentsPassed.heatmap is not None:
-        heatmap=argumentsPassed.heatmap
+    if argumentsPassed.heat is not None:
+        heatmap=argumentsPassed.heat
+    if argumentsPassed.font is not None:
+        fontName=argumentsPassed.font
 
     '''initializing to the project'''
     wandb.init(project=project_name,entity=entity_name)
@@ -101,7 +105,7 @@ def main():
     print("run name = {}".format(run))
     wandb.run.name=run
 
-    Train.runTrain(root,epochs,batchSize,test,attention,heatmap,modelType,embeddingSize,layersInEncoder,layersInDecoder,neruonsInFC,bidirectional,dropoutProb,learningRate)
+    Train.runTrain(root,epochs,batchSize,test,attention,heatmap,modelType,embeddingSize,layersInEncoder,layersInDecoder,neruonsInFC,bidirectional,dropoutProb,learningRate,fontName)
     wandb.finish()
 
 if __name__ == '__main__':
