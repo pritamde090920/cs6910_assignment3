@@ -115,6 +115,10 @@ The following features are also supported
     ```
     python train.py --attention 1 --heatmap 1
     ``` 
+  - If you are using any language other than the default Bengali language set for the model, then to generate the heatmap you need to download and install the font of the language into your environment. You can find the required font in [Font](https://fonts.google.com). Here you can type in your preferred language and download the respective font file. Right click on the downloaded file and install it. Make sure you download the file into the same directory as the project. After successful installation, you need to specify the name of the .TTF file generated and run the model like :
+  ```
+  python train.py --font <name_of_the_font_file>.TTF
+  ```
   
   
 
