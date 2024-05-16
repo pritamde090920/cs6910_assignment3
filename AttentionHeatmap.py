@@ -160,7 +160,8 @@ def plotAttn(model,inputSequence,outputSequence,vocabulary,trainPy=0,fontName='B
             xTicks,yTicks=Utilities.createXandYticks(bengaliLength,englishLength,vocabulary,attentionSequence,inputSequence,row)
 
             '''create the heatmap'''
-            axes=createHeatMap(attentionPerCharacter,axes,row,bengaliLength,englishLength,xTicks,yTicks,fontName)
+            if row<len(axes):
+                axes=createHeatMap(attentionPerCharacter,axes,row,bengaliLength,englishLength,xTicks,yTicks,fontName)
 
         '''save the plot and log into wandb'''
         if trainPy==0:
