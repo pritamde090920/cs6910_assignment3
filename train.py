@@ -51,7 +51,7 @@ def main():
     epochs=15
     batchSize=64
     dropoutProb=0
-    test=0
+    test=1
     root='aksharantar_sampled/ben'
     attention=1
     heatmap=1

@@ -69,7 +69,7 @@ def createHeatMap(attentionPerCharacter,axes,row,bengaliLength,englishLength,xTi
     yObj=Utilities.getFormatObject(yTicks)
 
     '''create the heatmap structure'''
-    seaborn.heatmap(attentionPerCharacter, ax=axes[row], cmap='magma', cbar=False, vmin=0.0, vmax=1.0)
+    seaborn.heatmap(attentionPerCharacter,ax=axes[row],cmap='magma',cbar=False,vmin=0.0,vmax=1.0)
 
     '''edit the axes as per requirement'''
     axes[row].xaxis.set_major_formatter(nullObj)
@@ -138,7 +138,7 @@ def plotAttn(model,inputSequence,outputSequence,vocabulary,trainPy=0,fontName='B
             '''source word'''
             column=0
             flag=True
-            while(flag):
+            while(flag and column<inputSequence.size(1)):
                 if inputSequence[row][column].item()==vocabulary.endOfSequenceIndex:
                     englishLength=column+1
                     flag=False
@@ -147,7 +147,7 @@ def plotAttn(model,inputSequence,outputSequence,vocabulary,trainPy=0,fontName='B
             '''target word'''
             column=0
             flag=True
-            while(flag):
+            while(flag and column<outputSequence.size(1)-1):
                 if attentionSequence[row][column].item()==vocabulary.endOfSequenceIndex:
                     bengaliLength=column+1
                     flag=False

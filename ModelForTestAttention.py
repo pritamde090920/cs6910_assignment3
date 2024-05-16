@@ -144,10 +144,10 @@ class RunTestOnBestModel:
                 for pos in range(batchSize):
                     word=""
                     for predictedChar in predictedSequence[pos]:
-                        if predictedChar==endOfSequenceIndex:
-                            break
                         if predictedChar>=paddingIndex:
                             word+=indexToCharDictForBengali[predictedChar.item()]
+                        if predictedChar==endOfSequenceIndex:
+                            break
                     modelPredictedWords.append(word)
 
             '''calculate accuracy and loss'''

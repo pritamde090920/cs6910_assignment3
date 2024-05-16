@@ -1,4 +1,3 @@
-import torch
 from LoadDataset import DatasetLoad
 from PrepareVocabulary import PrepareVocabulary
 from WordEmbeddings import WordEmbeddings
@@ -7,7 +6,6 @@ import AttentionHeatmap
 import Utilities
 import torch.utils as utils
 import itertools
-import numpy as np
 import pandas as pd
 
 '''The purpose of this code is to act like a driver code for generating the attention heatmaps'''

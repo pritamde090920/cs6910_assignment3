@@ -163,7 +163,7 @@ class RunTestOnBestModel:
                 print("Test Loss: {}".format(testLoss))
 
             '''create csv of the predictions'''
-            createCsv(actualData,modelPredictedWords,trainPy)
+            createCsv(actualData,modelPredictedWords)
 
             if trainPy==0:
                 '''create the image of the table'''

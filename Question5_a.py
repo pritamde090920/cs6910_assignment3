@@ -4,7 +4,6 @@ from WordEmbeddings import WordEmbeddings
 from ModelTrainDriver import Model
 import torch.utils as utils
 import wandb
-import torch
 
 '''login to wandb to generate plot'''
 wandb.login()

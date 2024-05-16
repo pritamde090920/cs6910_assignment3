@@ -12,8 +12,12 @@ class DatasetLoad:
             Function:
                 Loads train and valiation dataset
         '''
-        train_dataset_path=root+"/"+lang+"_train.csv"
-        val_dataset_path=root+"/"+lang+"_valid.csv"
+        if "\\" in root:
+            train_dataset_path=root+"/"+lang+"_train.csv"
+            val_dataset_path=root+"/"+lang+"_valid.csv"
+        else:
+            train_dataset_path=root+"\\"+lang+"_train.csv"
+            val_dataset_path=root+"\\"+lang+"_valid.csv"
         train_dataframe=pd.read_csv(train_dataset_path,sep=",",header=None)
         val_dataframe=pd.read_csv(val_dataset_path,sep=",",header=None)
         self.train_dataset=train_dataframe.values
@@ -29,6 +33,9 @@ class DatasetLoad:
             Function:
                 Loads test dataset
         '''
-        test_dataset_path=root+"/"+lang+"_test.csv"
+        if "\\" in root:
+            test_dataset_path=root+"/"+lang+"_test.csv"
+        else:
+            test_dataset_path=root+"\\"+lang+"_test.csv"
         self.test_dataframe=pd.read_csv(test_dataset_path,sep=",",header=None)
         self.test_dataset=self.test_dataframe.values

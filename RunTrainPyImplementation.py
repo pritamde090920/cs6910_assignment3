@@ -16,10 +16,13 @@ class Train:
         '''loads dataset'''
         lang=""
         d=DatasetLoad()
-        lang=root[root.rfind("/")+1:]
+        if "\\" in root:
+            lang=root[root.rfind("\\")+1:]
+        else:
+            lang=root[root.rfind("/")+1:]
         d.loadDataset(root,lang)
         d.loadTestDataset(root,lang)
-
+        
         '''creates vocabulary from the dataset'''
         vocabulary=PrepareVocabulary()
         vocabulary.createVocabulary(d.train_dataset)

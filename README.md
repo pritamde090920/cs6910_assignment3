@@ -14,7 +14,7 @@ Make sure you are in the correct directory before proceeding further.
 
 ## Setting up the platform and environment
 - ### Local machine
-  If you are running the code on a local machine, then you need to have ython installed in the machine and pip command added in the environemnt variables.
+  If you are running the code on a local machine, then you need to have python installed in the machine and pip command added in the environemnt variables.
   You can execute the following command to setup the environment and install all the required packages
   ```
   pip install -r requirements.txt
@@ -22,7 +22,7 @@ Make sure you are in the correct directory before proceeding further.
 - ### Google colab/Kaggle
   If you are using google colab platform or kaggle, then you need to execute the follwoing code
   ```
-  pip install wandb torch lightning pytorch_lightning matplotlib torchvision torchmetrics
+  pip install wandb argparse torch plotly matplotlib numpy pandas seaborn
   ```
 This step will setup the environment required before proceeding.
 
@@ -33,30 +33,30 @@ The project deals in working with Sequence Learning Problems. It works with thre
 - Long Short Term Memory (LSTM)
 - Gated Recurrent Unit (GRU)
 
+The project supports all the three types of cells with the encoder and decoder architectures. Additionally the feature of adding attention to the encoder outputs before passing them to the decoder is also supported.
 
-## Loading and changing the dataset
-The whole dataset of ```aksharantar_sampled``` is provided in the project itself. So you do not need to specifically load the dataset from some other location.
+## Loading the dataset
+- Dataset is placed inside the project ```cs6910_assignment3``` directory
+  - Target language is same as default language (Bengali)
+    You do not need to do anything specifically for the dataset. The code will handle it automatically. You can simply run
+    ```
+    python train.py <any_specifications_related_to_the_model>
+    ```
+  - Target language is different
+    You need to specify the path of the specific language directory inside the dataset. For example if you want to run on Telugu dataset the run it like :
+    ```
+    python train.py --root aksharantar_sampled/tel
+    ```
 
-However, the default language used in the model is Bengali. If you want to use some other language then you need to specify its path.
-
-For example if you want to use the Telugu dataset then you need to run train.py with the command like 
-
-``` 
-  python train.py --root aksharantar_sampled/tel 
-```
+- Dataset is placed outside the project directory
+  In this case you need to specify the absolute path of the directory of the language (even if it is the default language Bengali) you want to run the model with.
+  For example,
+  ```
+  python train.py --root <absolute_path_till_specific_language_directory_inside_aksharantar_sampled>
+  ```
 
 #### Note
-Since the dataset is provided along with the project itself, you do not need to explicitly load the dataset or pass its path as command.
-
-If you still want to load the dataset from outside the project directory then you need to specify the absolute path of the directory of the language you want to run the model with.
-
-For example,
-```
-python train.py --root <absolute_path_till_language_directory>
-```
-
-Note than simply passing the abosulte path of the root directory ```aksharantar_sampled``` 
-will not work. You need to give the abosulte path of the language directory inside ```aksharantar_sampled```.
+Here aksharantar_sampled refers to the directory obtained after unzipping the ```aksharantar_sampled.zip``` provided along with the question.
 
 
 ## Training the model
@@ -116,11 +116,11 @@ The following features are also supported
     python train.py --attention 1 --heatmap 1
     ``` 
   - If you are using any language other than the default Bengali language set for the model, then to generate the heatmap you need to download and install the font of the language into your environment. You can find the required font in [Font](https://fonts.google.com). Here you can type in your preferred language and download the respective font file. Right click on the downloaded file and install it. Make sure you download the file into the same directory as the project. After successful installation, you need to specify the name of the .TTF file generated and run the model like :
-  ```
-  python train.py --font <name_of_the_font_file>.TTF
-  ```
+    ```
+    python train.py --font <name_of_the_font_file>.TTF
+    ```
   
   
 
 ## Links
-[Wandb Report](https://wandb.ai/cs23m051/Pritam%20CS6910%20-%20Assignment%202/reports/CS6910-Assignment-2-Pritam-De-CS23M051--Vmlldzo3MzU5ODY3)
+[Wandb Report](https://wandb.ai/cs23m051/Pritam%20CS6910%20-%20Assignment%203/reports/CS6910-Assignment-3-Pritam-De-CS23M051--Vmlldzo3OTc3MDY3)

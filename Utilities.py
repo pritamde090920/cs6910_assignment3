@@ -1,7 +1,7 @@
 import torch
 from torch import optim
 import torch.nn as nn
-import plotly.graph_objects as go
+import plotly.graph_objects as graphObj
 from matplotlib.ticker import NullFormatter,FixedFormatter
 import numpy as np
 from PIL import Image
@@ -327,8 +327,8 @@ def plotHtml(df,fileName):
     head=dict(values=list(df.columns),fill_color='yellow',align='center',font_size=15,height=25)
     value=dict(values=columnValues,fill_color='orange',align='center',font_size=13,height=25)
     columns=dict(l=0,r=0,b=0,t=0)
-    table=go.Table(header=head,cells=value)
-    plot=go.Figure(data=[table])
+    table=graphObj.Table(header=head,cells=value)
+    plot=graphObj.Figure(data=[table])
     plot.update_layout(autosize=False,width=650,height=500,margin=columns)
     plot.write_html(fileName)
 
@@ -348,8 +348,8 @@ def plotHtmlComparison(df,fileName):
     head=dict(values=list(df.columns),fill_color='yellow',align='center',font_size=15,height=25)
     value=dict(values=columnValues,fill_color='orange',align='center',font_size=13,height=25)
     columns=dict(l=0,r=0,b=0,t=0)
-    table=go.Table(header=head,cells=value)
-    plot=go.Figure(data=[table])
+    table=graphObj.Table(header=head,cells=value)
+    plot=graphObj.Figure(data=[table])
     plot.update_layout(autosize=False,width=1000,height=500,margin=columns)
     plot.write_html(fileName)
     image=Image.open("AttentionVsSeq2Seq.png")
