@@ -38,17 +38,20 @@ The project supports all the three types of cells with the encoder and decoder a
 ## Loading the dataset
 - Dataset is placed inside the project ```cs6910_assignment3``` directory
   - Target language is same as default language (Bengali)
+
     You do not need to do anything specifically for the dataset. The code will handle it automatically. You can simply run
     ```
     python train.py <any_specifications_related_to_the_model>
     ```
   - Target language is different
-    You need to specify the path of the specific language directory inside the dataset. For example if you want to run on Telugu dataset the run it like :
+
+    You need to specify the path of the specific language directory inside the dataset. For example if you want to run on Telugu dataset then run it like :
     ```
     python train.py --root aksharantar_sampled/tel
     ```
 
 - Dataset is placed outside the project directory
+
   In this case you need to specify the absolute path of the directory of the language (even if it is the default language Bengali) you want to run the model with.
   For example,
   ```
